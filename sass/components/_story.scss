@@ -1,0 +1,98 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;  
+    padding-left: 9rem;//para completar el padding que necesita el circulo a la izquierda.
+    font-size: $default-font-size;
+
+    //Para hacer la inclinacion del contenedor pero que el contenido se mantenga vertical
+    transform: skewX(-12deg);
+
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;  
+        padding-left: 7rem;
+    }
+
+    @include respond(phone) {
+        width: 100%;
+        transform: skewX(0); //cambiar en '&__shape' para mantener la imagen vertical y en '&__text' tambien para mantener la letra vertical
+    }
+
+
+    
+
+    &__shape {
+        //para hacer la forma de circunferencia en el texto ')', para que funcione debe tener width, height y float.
+        // background-color: red; //color para pruebas
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        shape-outside: circle(50% at 50% 50%);
+
+        // Para dar forma a la imagen
+        clip-path: circle(50% at 50% 50%);
+        transform: translateX(-3rem) skewX(12deg); //mejor forma para dar margen a un elemento que flota
+
+        //Para que centrar el nombre sobre la imagen cuando se hace hover, se aplica en conjunto con &__caption
+        position: relative;
+
+        // Para que no se vea el fondo de la imagen cuando se hace hover, comentar propiedad para entender comentario.
+        overflow: hidden;
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(0); 
+        }
+        
+    }
+
+    &__image {
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s; 
+    }
+
+    &__text {
+        transform: skewX(12deg);// transform: skewX(12deg); positivo debe ser agregado en transform y en &__text manualmente. css no sosporta dos 'transform' en un mismo elemento.
+
+        @include respond(phone) {
+            transform: skewX(0); 
+        }
+    }
+
+    // Animacion sobre la imagen
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    //para el blur cuando se hace hover
+
+    &:hover &__image {
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}
+
+/*NOTAS
+
+LECCION 59 LAS MEDIA QUERIES
+
+*/

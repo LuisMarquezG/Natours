@@ -1,0 +1,74 @@
+.row {
+    max-width: $grid-width;
+    margin: 0 auto;
+    
+    &:not(:last-child){ //Used to delete margin-botton to the last row.
+        margin-bottom: $gutter-vertical;
+
+        //media query
+        @include respond(tab-port) {
+            margin-bottom: $gutter-vertical-small;
+        }   
+    } 
+
+        @include clearfix;
+
+     //media query
+        @include respond(tab-port) {
+            max-width: 50rem;
+            padding: 0 3rem; 
+    }   
+
+    /* NOTE
+       ^=, $=, and *=
+       These selectors look for a substring in the attribute[] value.
+
+       p[class^=col-]: any element whose class attribute has a value that starts with "col-1".
+       p[class$=col-]: any element whose class attribute has a value that ends with "col-1".
+       p[class*=col-]: any element whose class attribute has a value that contains "col-1". */
+
+    [class^="col-"] { // All the elements with a class starting with "col-1" will have those properties.
+        float: left;
+        margin-top: $gutter-vertical-small; //para que la ultima tarjeta, en las secciones donde este, no se pegue a la penultima cuando se hace pequena la pantalla (comentar codigo para entender)
+
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal;
+
+            //Media Query
+            @include respond(tab-port) {
+                margin-right: 0;
+                
+            }
+        }
+
+        //Media Query
+        @include respond(tab-port) {
+            width: 100% !important;
+        }
+    }
+
+    .col-1-of-2 {
+        width: calc((100% - #{$gutter-horizontal}) / 2); //Func calc((100% witdh - #{gutter-horizontal}) between /2);    
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - 2 * #{$gutter-horizontal}) / 3); //Func calc((100% witdh - 2 * #{gutter-horizontal}) between /3);
+    }
+
+    .col-2-of-3 {
+        width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal}); //Func calc(2 *(100% witdh - 2 * #{gutter-horizontal}) between /3) + #{$gutter-horizontal});
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - 3 * #{$gutter-horizontal}) / 4); //Func calc((100% witdh - 3 * #{gutter-horizontal}) between /4);
+    }
+
+    .col-2-of-4 {
+        width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal}); //Func calc(2 *(100% witdh - 2 * #{gutter-horizontal}) between /4) + #{$gutter-horizontal});
+    }
+
+    .col-3-of-4 {
+        width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal}); //Func calc(3 *(100% witdh - 2 * #{gutter-horizontal}) between /4) + 2 * #{$gutter-horizontal});
+    }
+}
+
